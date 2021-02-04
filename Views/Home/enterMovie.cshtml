@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Enter a Movie for Joel";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Enter A movie</p>
+
+@model Movie_Assignment_3.Models.Movies
+<form asp-action="enterMovie" method="post">
+    <div>
+        <label asp-for="Category">Category: </label>
+        <input asp-for="Category" />
+    </div>
+
+    <div>
+        <label asp-for="Title">Title: </label>
+        <input asp-for="Title" />
+    </div>
+
+    <div>
+        <label asp-for="Year">Year: </label>
+        <input asp-for="Year" />
+    </div>
+
+    <div>
+        <label asp-for="Director">Director: </label>
+        <input asp-for="Director" />
+    </div>
+
+    <div>
+        <label asp-for="Rating">Rating?: </label>
+        <select asp-for="Rating">
+            <option value="">Select One</option>
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG13">PG-13</option>
+            <option value="R">R</option>
+
+        </select>
+    </div>
+
+    <div>
+        <label asp-for="Edited">Is it Edited?: </label>
+        <select asp-for="Edited">
+            <option value="">Select One</option>
+            <option value="True">Yes</option>
+            <option value="False">No</option>
+
+        </select>
+    </div>
+
+    <div>
+        <label asp-for="Lent">Lent To: </label>
+        <input asp-for="Lent" />
+    </div>
+
+    <div>
+        <label asp-for="Notes">Notes: </label>
+        <input asp-for="Notes" />
+    </div>
+
+
+
+    <button type="submit">Submit your Movie</button>
+</form>
+<div asp-validation-summary="All"></div>
