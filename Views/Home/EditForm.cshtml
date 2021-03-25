@@ -1,35 +1,36 @@
 ﻿@{
-    ViewData["Title"] = "Enter a Movie for Joel";
+    ViewData["Title"] = "Edit Movie";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Enter A movie</p>
-<!--This is where you can enter the info for a movie to be added to the collection-->
 @model Movie_Assignment_3.Models.Movies
-<form asp-action="enterMovie" method="post">
+
+<!--This is the form that passes in all the data that is from the database, but allows you to edit it and then save changes
+    to the database so it is saved forever-->
+<form asp-action="MovieUpdate" method="post">
     <div>
         <label asp-for="Category">Category: </label>
-        <input asp-for="Category" />
+        <input asp-for="Category" required value="@Model.Category"/>
     </div>
 
     <div>
         <label asp-for="Title">Title: </label>
-        <input asp-for="Title" />
+        <input asp-for="Title" required value="@Model.Title"/>
     </div>
 
     <div>
         <label asp-for="Year">Year: </label>
-        <input asp-for="Year" />
+        <input asp-for="Year" required value="@Model.Year"/>
     </div>
 
     <div>
         <label asp-for="Director">Director: </label>
-        <input asp-for="Director" />
+        <input asp-for="Director" required value="@Model.Director"/>
     </div>
 
     <div>
         <label asp-for="Rating">Rating?: </label>
-        <select asp-for="Rating">
+        <select asp-for="Rating" required value="@Model.Rating">
             <option value="">Select One</option>
             <option value="G">G</option>
             <option value="PG">PG</option>
@@ -41,7 +42,7 @@
 
     <div>
         <label asp-for="Edited">Is it Edited?: </label>
-        <select asp-for="Edited">
+        <select asp-for="Edited" required value="@Model.Edited">
             <option value="">Select One</option>
             <option value="True">Yes</option>
             <option value="False">No</option>
@@ -51,16 +52,16 @@
 
     <div>
         <label asp-for="Lent">Lent To: </label>
-        <input asp-for="Lent" />
+        <input asp-for="Lent" required value="@Model.Lent"/>
     </div>
 
     <div>
         <label asp-for="Notes">Notes: </label>
-        <input asp-for="Notes" />
+        <input asp-for="Notes" required value="@Model.Notes"/>
     </div>
+    <input hidden asp-for="MovieID" value="@Model.MovieID" />
 
 
-
-    <button type="submit">Submit your Movie</button>
+    <button type="submit">Save Changes</button>
 </form>
 <div asp-validation-summary="All"></div>

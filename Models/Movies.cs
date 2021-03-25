@@ -8,6 +8,8 @@ namespace Movie_Assignment_3.Models
 {
     public class Movies
     {
+        [Key]
+        public int MovieID { get; set; }
         [Required]
         public string Category { get; set; }
         [Required]

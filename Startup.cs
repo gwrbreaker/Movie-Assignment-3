@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Movie_Assignment_3.Models;
 
 namespace Movie_Assignment_3
 {
@@ -24,6 +26,20 @@ namespace Movie_Assignment_3
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<MovieDbContext>(options =>
+            {
+                options.UseSqlite(Configuration["ConnectionStrings:MovieConnection"]);
+            });
+
+            services.AddScoped<IMovieRepository, EFMovieRepository>();
+
+            services.AddRazorPages();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +59,8 @@ namespace Movie_Assignment_3
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseStatusCodePages();
+            app.UseSession();
 
             app.UseAuthorization();
 
@@ -52,6 +70,8 @@ namespace Movie_Assignment_3
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            SeedData.EnsurePopulated(app);
         }
     }
 }

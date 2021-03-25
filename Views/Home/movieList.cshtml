@@ -3,9 +3,9 @@
 }
 
 @model IEnumerable<Movie_Assignment_3.Models.Movies>
-
+<!--All the entered movies listed out from the database-->
 <div>
-    <h2>Here are the movies you have entered so far</h2>
+    <h2>Here are the movies you have entered so far, plus I Am Legend</h2>
 
     <table>
         <thead>
@@ -24,6 +24,17 @@
                     <td>@m.Edited</td>
                     <td>@m.Lent</td>
                     <td>@m.Notes</td>
+                    <td>
+                        <form asp-action="EditForm">
+                            <input hidden name="MovieID" id="MovieID" value="@m.MovieID" />
+                            <input type="submit" value="Edit" class="shadow" />
+                        </form></td>
+                    <td>
+                        <form asp-action="DeleteMovie">
+                            <input hidden name="MovieID" id="MovieID" value="@m.MovieID" />
+                            <input type="submit" value="Delete" class="shadow" />
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>
